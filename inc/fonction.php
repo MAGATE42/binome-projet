@@ -37,4 +37,10 @@ function countEmployes($conn, $dept_no, $search = "") {
     $res = mysqli_query($conn, $sql);
     return mysqli_fetch_assoc($res)['total'];
 }
+
+function getFicheEmploye($conn, $emp_no) {
+    $sql = "SELECT * FROM employees WHERE emp_no = '$emp_no'";
+    $res = mysqli_query($conn, $sql);
+    return mysqli_fetch_assoc($res);
+}
 ?>
