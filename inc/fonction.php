@@ -45,4 +45,9 @@ function getSalaires($conn, $emp_no) {
 function getTitres($conn, $emp_no) {
     return mysqli_query($conn, "SELECT * FROM titles WHERE emp_no = '$emp_no' ORDER BY from_date DESC");
 }
+function getFicheEmploye($conn, $emp_no) {
+    $sql = "SELECT * FROM employees WHERE emp_no = '$emp_no'";
+    $res = mysqli_query($conn, $sql);
+    return mysqli_fetch_assoc($res);
+}
 ?>
