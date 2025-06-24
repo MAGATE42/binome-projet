@@ -25,4 +25,16 @@ function getEmployesParDepartement($conn, $dept_no, $limit, $offset, $search = "
             LIMIT $offset, $limit";
     return mysqli_query($conn, $sql);
 }
+
+function countEmployes($conn, $dept_no, $search = "") {
+    $dept = mysqli_real_escape_string($conn, $dept_no);
+    $search = mysqli_real_escape_string($conn, $search);
+    $sql = "SELECT COUNT(*) AS total
+            FROM dept_emp d
+            JOIN employees e ON d.emp_no = e.emp_no
+            WHERE d.dept_no = '$dept'
+              AND (e.first_name LIKE '%$search%' OR e.last_name LIKE '%$search%')";
+    $res = mysqli_query($conn, $sql);
+    return mysqli_fetch_assoc($res)['total'];
+}
 ?>
