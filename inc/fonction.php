@@ -13,4 +13,16 @@ function getManager($conn, $dept_no) {
     return "Aucun";
 }
 
+function getEmployesParDepartement($conn, $dept_no, $limit, $offset, $search = "") {
+    $dept = mysqli_real_escape_string($conn, $dept_no);
+    $search = mysqli_real_escape_string($conn, $search);
+    $sql = "SELECT e.emp_no, e.first_name, e.last_name, e.gender, e.hire_date, e.birth_date
+            FROM dept_emp d
+            JOIN employees e ON d.emp_no = e.emp_no
+            WHERE d.dept_no = '$dept'
+              AND (e.first_name LIKE '%$search%' OR e.last_name LIKE '%$search%')
+            ORDER BY e.last_name
+            LIMIT $offset, $limit";
+    return mysqli_query($conn, $sql);
+}
 ?>
