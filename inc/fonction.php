@@ -37,4 +37,12 @@ function countEmployes($conn, $dept_no, $search = "") {
     $res = mysqli_query($conn, $sql);
     return mysqli_fetch_assoc($res)['total'];
 }
+
+function getSalaires($conn, $emp_no) {
+    return mysqli_query($conn, "SELECT * FROM salaries WHERE emp_no = '$emp_no' ORDER BY from_date DESC");
+}
+
+function getTitres($conn, $emp_no) {
+    return mysqli_query($conn, "SELECT * FROM titles WHERE emp_no = '$emp_no' ORDER BY from_date DESC");
+}
 ?>
